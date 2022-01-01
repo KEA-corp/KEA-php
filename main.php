@@ -8,7 +8,7 @@
 ██             ██             ██
 ██
  - codé en : UTF-8
- - langage : python 3
+ - langage : php
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|--
 
