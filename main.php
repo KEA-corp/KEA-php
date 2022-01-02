@@ -144,9 +144,9 @@ function codeinloop($code, $nom ,$max) {
 
 
 start("
-V a 1
-V b 2
-
-C c a + b
-
+V i 0
+V 1 1
+L bcl 10
+C i i + 1
+E bcl
 ");?>
