@@ -32,6 +32,10 @@ function getvar($name) {
     echo "Variable $name non trouvée\n";
 }
 
+function user_input($var, $ACTIVE) {
+    setvar($var, readline(), $ACTIVE);
+}
+
 function debugprint() {
     echo "\nVARIABLES:\n";
     global $VARVAL, $VARNAME;
@@ -106,6 +110,7 @@ function start ($code) {
     $VARNAME = array();
     $VARVAL = array();
 
+    $code = str_replace(";", "\n", $code);
     $code = str_replace("\r", "", $code);
     $code = explode("\n", $code);
 
@@ -193,13 +198,16 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "S") {
-                    // si $args[1] n'est pas défini, affichier \n
                     if (empty($args[1])) {
                         echo "\n";
                     }
                     else {
-                        echo $args[1] . "\n";
+                        echo $args[1];
                     }
+                }
+
+                else if ($mode == "I") {
+                    user_input($args[1], $nom);
                 }
 
                 else if ($mode == "A") {
