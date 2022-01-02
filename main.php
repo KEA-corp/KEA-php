@@ -1,3 +1,5 @@
+<?php
+/*
 --|~|--|~|--|~|--|~|--|~|--|~|--
 
 ██  ████        ██████        ██
@@ -11,8 +13,7 @@
  - langage : php
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|--
-
-<?php
+*/
 
 function debug_print($texte){
     global $DEBUG;
@@ -28,6 +29,7 @@ function getvar($name) {
             return $VARVAL[$i];
         }
     }
+    echo "Variable $name non trouvée\n";
 }
 
 function debugprint() {
@@ -146,7 +148,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "L") {
-                    $sauter = bcl_ctrl($code, $i, $args[1], $args[2]);
+                    $sauter = bcl_ctrl($code, $i, $args[1], getvar($args[2]));
                 }
 
                 else if ($mode == "E") {
@@ -191,15 +193,21 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "S") {
-                    echo $args[1] ."\n";
+                    // si $args[1] n'est pas défini, affichier \n
+                    if (empty($args[1])) {
+                        echo "\n";
+                    }
+                    else {
+                        echo $args[1] . "\n";
+                    }
                 }
 
                 else if ($mode == "A") {
                     echo getvar($args[1]);
                 }
 
-                else {
-                    echo "Erreur: $mode\n";
+                else if ($mode =! "//") {
+                    echo "Erreur de mode: $mode\n";
                 }
             }
             else {
@@ -209,24 +217,36 @@ function codeinloop($code, $nom ,$max) {
     }
 }
 
-
 start("
-D off
-V a 0
-V 2 2
+S runing
+V i 1
+V 0 0
+V 0.5 0.5
 V 1 1
-L find 100
-    C a a + 1
-    C mod a % 2
-    B pair mod == 0
-    B impair mod != 0
-    X Pprinter pair
-        A a
-        S _est_pair
-        E Pprinter
-    X Iprinter impair
-        A a
-        S _est_impair
-        E Iprinter
-    E find
+V 2 2
+V to 10000
+L nbr to
+    C i i + 1
+    C mod i % 2
+    B inpair mod != 0
+    X done inpair
+        B good 1 == 1
+        C max i ^ 0.5
+        C max max - 1
+        V x 1
+        L all max
+            C x x + 1
+            C mod i % x
+            B bad mod == 0
+            X no bad
+                B good 0 == 1
+                Z
+                E no
+            E all
+        X prem good
+            A i
+            S
+            E prem
+        E done
+    E nbr
 ");?>
