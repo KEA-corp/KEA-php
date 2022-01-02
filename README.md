@@ -20,7 +20,7 @@ php main.php <nom du fichier>
 | break                   | Z   |               |             |             |      |
 
 ## trouver les nombres premiers
-```
+```dart
 S runing
 V i 1
 V 0 0
