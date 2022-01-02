@@ -1,3 +1,9 @@
+## lancer un programme
+
+```shell
+php main.php <nom du fichier>
+```
+
 ## mode et args du kea brut
 
 | description             | mod | arg1          | arg2        | agr3        | arg4 |
