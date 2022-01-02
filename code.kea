@@ -1,11 +1,5 @@
-V i 0
-V 1 1
-V 2 2
-V to 25
-L p to
-    C i i + 1
-    C temp 2 ^ i
-    A temp
-    S
-    E p
-D print
+V i
+V inf INF
+L bcl inf
+    S coucou
+    E bcl
