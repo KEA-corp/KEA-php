@@ -224,7 +224,7 @@ V 0 0
 V 0.5 0.5
 V 1 1
 V 2 2
-V to 10000
+V to 1000000
 L nbr to
     C i i + 1
     C mod i % 2
