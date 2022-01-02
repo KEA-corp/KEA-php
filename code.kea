@@ -1,0 +1,19 @@
+S >>
+I to
+V i 0
+V 1 1
+V 2 2
+L bcl to
+    C i i + 1
+    C temp to - i
+    L printer temp
+        S .
+        E printer
+    L printer2 i
+        S ##
+        E printer2
+    L printer3 temp
+        S .
+        E printer3
+    S
+    E bcl
