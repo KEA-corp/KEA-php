@@ -128,6 +128,9 @@ function codeinloop($code, $nom ,$max) {
             $ligne = trim($ligne);
             $args = explode(" ", $ligne);
             $mode = $args[0];
+            if ($DEBUG){
+                $debut = microtime(true);
+            }
             
             if($sauter == "" || ($mode == "E" && $args[1] == $sauter)){
                 $sauter = "";
@@ -210,6 +213,11 @@ function codeinloop($code, $nom ,$max) {
             }
             else {
                 debug_print("$nom → sauter: $ligne\n");
+            }
+            if ($DEBUG) {
+                $fin = microtime(true);
+                $duree = $fin - $debut;
+                debug_print("$nom → $ligne ($duree s)\n");
             }
         }
     }
