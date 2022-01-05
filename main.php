@@ -23,13 +23,13 @@ function debug_print($texte){
 }
 
 function getvar($name) {
-    global $VARVAL, $VARNAME;
-    for($i = 0; $i < count($VARNAME); $i++) {
-        if($VARNAME[$i] == $name) {
-            return $VARVAL[$i];
-        }
+    global $VAR;
+    if (isset($VAR[$name])) {
+        return $VAR[$name];
+    } else {
+        echo "Variable $name non trouvée\n";
+        return "";
     }
-    echo "Variable $name non trouvée\n";
 }
 
 function user_input($var, $ACTIVE) {
@@ -38,9 +38,9 @@ function user_input($var, $ACTIVE) {
 
 function debugprint() {
     echo "\nVARIABLES:\n";
-    global $VARVAL, $VARNAME;
-    for($i = 0; $i < count($VARNAME); $i++) {
-        echo "[§" . $i . "] " . $VARNAME[$i] . " = " . $VARVAL[$i] . "\n";
+    global $VAR;
+    foreach ($VAR as $key => $value) {
+        echo "$key = $value\n";
     }
 }
 
@@ -66,18 +66,9 @@ function compar( $comparateur, $var1, $var2) {
 }
 
 function setvar($name, $valeur, $ACTIVE) {
-    global $VARVAL, $VARNAME;
-    for($i = 0; $i < count($VARNAME); $i++) {
-        if($VARNAME[$i] == $name) {
-            debug_print("$ACTIVE → modification: $name = $valeur\n");
-            $VARVAL[$i] = $valeur;
-            return;
-        }
-    }
-    
-    debug_print("$ACTIVE → ajout: $name = $valeur\n");
-    array_push($VARNAME, $name);
-    array_push($VARVAL, $valeur);
+    global $VAR;
+    debug_print("$ACTIVE → variable: $name = $valeur\n");
+    $VAR[$name] = $valeur;
 }
 
 function calc($calcul, $var1, $var2) {
@@ -105,10 +96,9 @@ function calc($calcul, $var1, $var2) {
 }
 
 function start ($code) {
-    global $VARVAL, $VARNAME, $DEBUG;
+    global $VAR, $DEBUG;
     $DEBUG = false;
-    $VARNAME = array();
-    $VARVAL = array();
+    $VAR = [];
 
     $code = str_replace(";", "\n", $code);
     $code = str_replace("\r", "", $code);
