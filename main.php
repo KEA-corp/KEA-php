@@ -230,4 +230,3 @@ if (isset($argv[1])) {
 else {
     echo "Erreur: pas de fichier\n";
 }
-?>
