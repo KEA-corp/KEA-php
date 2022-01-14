@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/kea.png)
 
-# lancer un programme
+# lancer un programme kea
 
 ```shell
 php main.php <nom du fichier>
