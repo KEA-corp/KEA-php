@@ -96,15 +96,21 @@ function calc($calcul, $var1, $var2) {
 }
 
 function start ($code) {
-    global $VAR, $DEBUG;
+    global $VAR, $DEBUG, $FUNCTIONS;
     $DEBUG = false;
     $VAR = [];
+    $FUNCTIONS = [];
 
     $code = str_replace(";", "\n", $code);
     $code = str_replace("\r", "", $code);
     $code = explode("\n", $code);
 
     codeinloop($code, "main" ,1);
+}
+
+function save_fonction($name, $code, $i) {
+    global $FUNCTIONS;
+    $FUNCTIONS[$name] = [$code, $i];
 }
 
 function bcl_ctrl($code, $i, $nom, $nb){
@@ -119,7 +125,7 @@ function bcl_ctrl($code, $i, $nom, $nb){
 }
 
 function codeinloop($code, $nom ,$max) {
-    global $DEBUG;
+    global $DEBUG, $FUNCTIONS;
     debug_print("demarrage de la boucle '$nom'\n");
     $sauter = "";
     for ($rep = 0; $rep < $max; $rep++) {
@@ -167,6 +173,27 @@ function codeinloop($code, $nom ,$max) {
                 else if ($mode == "B") {
                     setvar($args[1], compar($args[3], $args[2], $args[4]), $nom);
                 }
+
+                else if ($mode == "H") {
+                    setvar($args[1], getvar($args[2]), $nom);
+                }
+
+                else if ($mode == "F"){
+                    save_fonction($args[1], $code, $i);
+                    $sauter = $args[1];
+                }
+
+                else if ($mode == "T"){
+                    $fonction = $args[1];
+                    if (isset($FUNCTIONS[$fonction])) {
+                        $code = $FUNCTIONS[$fonction][0];
+                        $oldi = $FUNCTIONS[$fonction][1];
+                        bcl_ctrl($code, $oldi, $args[1], 1);
+                    }
+                    else {
+                        echo "Fonction $fonction non trouvée\n";
+                    }
+                }
                 
                 else if ($mode == "D") {
                     if ($args[1] == "on") {
@@ -195,7 +222,7 @@ function codeinloop($code, $nom ,$max) {
                         echo "\n";
                     }
                     else {
-                        echo $args[1];
+                        echo str_replace("_", " ", $args[1]);
                     }
                 }
 

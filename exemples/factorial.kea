@@ -1,0 +1,15 @@
+V 2 2
+V 1 1
+F factorielle
+    V exit 1
+    H i to
+    L loopto to
+        C exit exit * i
+        C i i - 1
+        E loopto
+    E factorielle
+
+S factorielle_->_
+I to
+T factorielle
+A exit
