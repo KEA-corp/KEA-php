@@ -15,6 +15,8 @@
 --|~|--|~|--|~|--|~|--|~|--|~|--
 */
 
+$version = "1.1.39";
+
 function debug_print($texte){
     global $DEBUG;
     if ($DEBUG) {
