@@ -13,7 +13,7 @@ Oui, oui, En KEA tout passe par des boucles: les condition sont des boucles, les
 - **Pourquoi *'KEA'* ?**\
 Au depart, l'interpréteur s'appellait *'inter'* pour interpréteur puis *'Pinter'* pour PHP-interpréteur se fait largement penser a *'panther'* alors pourquoi un nom d'animal, le kea et rapide, atypique, et le nom n'est pas trop long...
 - **Et l'interpréteur il est en C ?**\
-Non, il est en PHP le C était trop bas niveau, et le PHP est plus haut niveau, plus facile à apprendre, et plus facile à utiliser sans être trop lent.
+Non, il est en PHP le C est 'trop' bas niveau, PHP est plus facile à utiliser sans être trop lent.
 - **Pour les performances sa donne quoi?**\
 ~~feur~~ Les calculs sont faits en PHP, c'est donc relativement rapide, mais il reste en langage interprété, par un langage interprété, il faut pas s'attendre à des miracles...
 
