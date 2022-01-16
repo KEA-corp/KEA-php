@@ -38,7 +38,7 @@ function user_input($var, $ACTIVE) {
     setvar($var, readline(), $ACTIVE);
 }
 
-function debugprint() {
+function debug_print_all() {
     echo "\nVARIABLES:\n";
     global $VAR;
     foreach ($VAR as $key => $value) {
@@ -52,6 +52,8 @@ function compar( $comparateur, $var1, $var2) {
     switch($comparateur) {
         case "==":
             return $a == $b;
+        case "=":
+            return $a == $b;
         case "!=":
             return $a != $b;
         case ">":
@@ -63,14 +65,19 @@ function compar( $comparateur, $var1, $var2) {
         case "<=":
             return $a <= $b;
         default:
-            echo "Erreur de comparaison : " . $comparateur . "\n";
+            echo "Erreur de comparaison : '$comparateur' \n";
     }
 }
 
 function setvar($name, $valeur, $ACTIVE) {
     global $VAR;
-    debug_print("$ACTIVE → variable: $name = $valeur\n");
+    debug_print("$ACTIVE → V '$name' = '$valeur'\n");
     $VAR[$name] = $valeur;
+}
+
+function setsauter($valeur, $nom) {
+    debug_print("$nom → sauter = '$valeur'\n");
+    return $valeur;
 }
 
 function calc($calcul, $var1, $var2) {
@@ -129,19 +136,18 @@ function bcl_ctrl($code, $i, $nom, $nb){
 function codeinloop($code, $nom ,$max) {
     global $DEBUG, $FUNCTIONS;
     debug_print("demarrage de la boucle '$nom'\n");
-    $sauter = "";
+    $sauter = setsauter("", $nom);
     for ($rep = 0; $rep < $max; $rep++) {
         for ($i = 0; $i < sizeof($code); $i++) {
             $ligne = $code[$i];
             $ligne = trim($ligne);
             $args = explode(" ", $ligne);
             $mode = $args[0];
-            if ($DEBUG){
-                $debut = microtime(true);
-            }
             
             if($sauter == "" || ($mode == "E" && $args[1] == $sauter)){
-                $sauter = "";
+                if ($sauter != "") {
+                    $sauter = setsauter("", $nom);
+                }
 
                 if($mode == "") {
                     continue;
@@ -154,7 +160,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "L") {
-                    $sauter = bcl_ctrl($code, $i, $args[1], getvar($args[2]));
+                    $sauter = setsauter(bcl_ctrl($code, $i, $args[1], getvar($args[2])), $nom);
                 }
 
                 else if ($mode == "E") {
@@ -181,8 +187,9 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "F"){
+                    echo "$i, $nom, $args[1]\n";
                     save_fonction($args[1], $code, $i);
-                    $sauter = $args[1];
+                    $sauter = setsauter($args[1], $nom);
                 }
 
                 else if ($mode == "T"){
@@ -205,16 +212,16 @@ function codeinloop($code, $nom ,$max) {
                         $DEBUG = false;
                     }
                     else{
-                        debugprint();
+                        debug_print_all();
                     }
                 }
 
                 else if ($mode == "X") {
                     if (getvar($args[2]) == true) {
-                        $sauter = bcl_ctrl($code, $i, $args[1], 1);
+                        $sauter = setsauter(bcl_ctrl($code, $i, $args[1], 1), $nom);
                     }
                     else {
-                        $sauter =  $args[1];
+                        $sauter = setsauter($args[1], $nom);
                         debug_print("condition non remplie: $sauter\n");
                     }
                 }
@@ -241,12 +248,7 @@ function codeinloop($code, $nom ,$max) {
                 }
             }
             else {
-                debug_print("$nom → sauter: $ligne\n");
-            }
-            if ($DEBUG) {
-                $fin = microtime(true);
-                $duree = $fin - $debut;
-                debug_print("$nom → $ligne ($duree s)\n");
+                debug_print("$nom → passer '$ligne'\n");
             }
         }
     }
