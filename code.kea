@@ -1,11 +1,14 @@
-V 2 2
+V 1 1
+V 10 10
+V i 1
 
-F pass
-    E pass
+F ac
+    C i i + 1
+    E ac
 
-L bcl 2
-    T pass
-    S coucou
+L bcl 10
+    S i_=_
+    A i
+    S
+    T ac
     E bcl
-
-D print
