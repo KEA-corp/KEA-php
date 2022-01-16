@@ -15,7 +15,7 @@
 --|~|--|~|--|~|--|~|--|~|--|~|--
 */
 
-$version = "1.1.42";
+$version = "1.1.47";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -46,7 +46,12 @@ function debug_print_all() {
     echo "\nVARIABLES:\n";
     global $VAR;
     foreach ($VAR as $key => $value) {
-        echo "$key = $value\n";
+        echo "- $key = $value\n";
+    }
+    echo "\nFONCTIONS:\n";
+    global $FUNCTIONS;
+    foreach ($FUNCTIONS as $key => $value) {
+        echo "- $key = [[...],". $value[1] ."]\n";
     }
 }
 
@@ -139,14 +144,14 @@ function bcl_ctrl($code, $i, $nom, $nb){
 
 function codeinloop($code, $nom ,$max) {
     global $DEBUG, $FUNCTIONS;
-    debug_print("demarrage de la boucle '$nom'\n");
+    debug_print("DEMARAGE DE LA BOUCLE '$nom'\n");
     $sauter = setsauter("", $nom);
     for ($rep = 0; $rep < $max; $rep++) {
         for ($i = 0; $i < sizeof($code); $i++) {
             $ligne = $code[$i];
             $ligne = trim($ligne);
 
-            debug_print("[$nom]($i) *** $ligne ***\n", true);
+            debug_print("[$nom]($rep~$i) *** $ligne ***\n", true);
 
             $args = explode(" ", $ligne);
             $mode = $args[0];
@@ -172,6 +177,7 @@ function codeinloop($code, $nom ,$max) {
 
                 else if ($mode == "E") {
                     if ($args[1] == $nom) {
+                        debug_print("ARRET DE LA BOUCLE '$nom'\n");
                         break;
                     }
                 }
@@ -194,7 +200,6 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "F"){
-                    echo "$i, $nom, $args[1]\n";
                     save_fonction($args[1], $code, $i);
                     $sauter = setsauter($args[1], $nom);
                 }
@@ -202,9 +207,9 @@ function codeinloop($code, $nom ,$max) {
                 else if ($mode == "T"){
                     $fonction = $args[1];
                     if (isset($FUNCTIONS[$fonction])) {
-                        $code = $FUNCTIONS[$fonction][0];
+                        $fonc_code = $FUNCTIONS[$fonction][0];
                         $oldi = $FUNCTIONS[$fonction][1];
-                        bcl_ctrl($code, $oldi, $args[1], 1);
+                        bcl_ctrl($fonc_code, $oldi, $args[1], 1);
                     }
                     else {
                         echo "Fonction $fonction non trouvée\n";
@@ -238,7 +243,7 @@ function codeinloop($code, $nom ,$max) {
                         echo "\n";
                     }
                     else {
-                        echo str_replace("_", " ", $args[1]);
+                        echo "\e[0;0;34m". str_replace("_", " ", $args[1]) . "\e[0m\n";
                     }
                 }
 
@@ -247,7 +252,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "A") {
-                    echo getvar($args[1]);
+                    echo "\e[0;0;36m". getvar($args[1]). "\e[0m\n";
                 }
 
                 else if ($mode =! "//") {

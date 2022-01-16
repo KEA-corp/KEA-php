@@ -1,5 +1,3 @@
-D on
-
 V 2 2
 
 F pass
@@ -7,4 +5,7 @@ F pass
 
 L bcl 2
     T pass
+    S coucou
     E bcl
+
+D print
