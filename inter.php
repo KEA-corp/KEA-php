@@ -15,7 +15,7 @@
 --|~|--|~|--|~|--|~|--|~|--|~|--
 */
 
-$version = "1.1.48";
+$version = "1.1.49";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -243,8 +243,9 @@ function codeinloop($code, $nom ,$max) {
                         echo "\n";
                     }
                     else {
-                        echo "\e[0;0;34m". str_replace("_", " ", $args[1]) . "\e[0m";
+                        echo "\e[0;0;33m". str_replace("_", " ", $args[1]) . "\e[0m";
                     }
+                    if ($DEBUG) {echo "\n";}
                 }
 
                 else if ($mode == "I") {
@@ -252,7 +253,8 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "A") {
-                    echo "\e[0;0;36m". getvar($args[1]). "\e[0m";
+                    echo "\e[0;1;33m". getvar($args[1]). "\e[0m";
+                    if ($DEBUG) {echo "\n";}
                 }
 
                 else if ($mode =! "//") {
