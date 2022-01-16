@@ -17,10 +17,14 @@
 
 $version = "1.1.39";
 
-function debug_print($texte){
+function debug_print($texte, $blue = false){
     global $DEBUG;
     if ($DEBUG) {
-        echo $texte;
+        if ($blue) {
+            echo "\e[0;1;30m$texte\e[0m";
+        } else {
+            echo $texte;
+        }
     }
 }
 
@@ -141,6 +145,9 @@ function codeinloop($code, $nom ,$max) {
         for ($i = 0; $i < sizeof($code); $i++) {
             $ligne = $code[$i];
             $ligne = trim($ligne);
+
+            debug_print("[$nom]($i) *** $ligne ***\n", true);
+
             $args = explode(" ", $ligne);
             $mode = $args[0];
             
