@@ -15,7 +15,7 @@
 --|~|--|~|--|~|--|~|--|~|--|~|--
 */
 
-$version = "1.1.39";
+$version = "1.1.42";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
