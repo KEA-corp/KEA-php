@@ -228,6 +228,11 @@ function codeinloop($code, $nom ,$max) {
                     }
                 }
 
+                else if ($mode == "R"){
+                    $rand = rand(0, getvar($args[2]));
+                    setvar($args[1], $rand, $nom);
+                }
+
                 else if ($mode == "X") {
                     if (getvar($args[2]) == true) {
                         $sauter = setsauter(bcl_ctrl($code, $i, $args[1], 1), $nom);

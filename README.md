@@ -36,6 +36,7 @@ php main.php <nom du fichier>
 | copier une variable        | H   | var de sortie      | var modelle |             |      |
 | input                      | I   | var                |             |             |      |
 | boucle a tours             | L   | nom de boucle      | nb de tours |             |      |
+| variable aleatoire         | R   | var de sortie      | max (V)     |             |      |
 | afficher du texte          | S   | texte              |             |             |      |
 | téléphoner a une fonction  | T   | nom de la fonction |             |             |      |
 | assignation de variable    | V   | var                | valleur     |             |      |

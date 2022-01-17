@@ -1,14 +1,19 @@
-V 1 1
+V 100 100
 V 10 10
-V i 1
-
-F ac
-    C i i + 1
-    E ac
-
-L bcl 10
-    S i_=_
-    A i
-    S
-    T ac
-    E bcl
+R tofind 100
+L m 10
+    S _>>_
+    I userval
+    B egal tofind == userval
+    X oui egal
+        S bravo!
+        E oui
+    B sup tofind > userval
+    X nons sup
+        S essayer_plus_grand
+        E nons
+    B infer tofind < userval
+    X noni infer
+        S essayer_plus_petit
+        E noni
+    E m
