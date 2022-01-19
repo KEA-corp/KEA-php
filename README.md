@@ -4,7 +4,7 @@
     <img src="https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/kea.png">
 </p>
 
-## FAQ
+# 🍀 • FAQ
 
 - **Qu'est-ce que le KEA ?**\
 Et bien le KEA est langage de programmation interprété bassé sur les boucles...
@@ -17,28 +17,20 @@ Non, il est en PHP le C est 'trop' bas niveau, PHP est plus facile à utiliser s
 - **Pour les performances sa donne quoi?**\
 ~~feur~~ Les calculs sont faits en PHP, c'est donc relativement rapide, mais il reste en langage interprété, par un langage interprété, il faut pas s'attendre à des miracles...
 
-## lancer un programme kea
+[→ discord](http://pf4.ddns.net/discord)
+
+# 🥤 • Premier programme
+
+Dans cette petit exemple, on va faire un programme qui va afficher Hello.
+En KEA, on va utiliser le mode **S** pour afficher du texte.
+```kea
+S Hello
+```
+[→ tout les modes](/doc/modes.md)
+
+# 👾 • lancer un programme kea
 
 ```shell
-php main.php <nom du fichier>
+php inter.php <nom du fichier>
 ```
-
-## mode et args du kea brut
-
-| description                | mod | arg1               | arg2        | agr3        | arg4 |
-|----------------------------|-----|--------------------|-------------|-------------|------|
-| afficher une variable      | A   | var                |             |             |      |
-| comparaison logique        | B   | var de sortie      | var1        | comparateur | var2 |
-| calcul                     | C   | var de sortie      | var1        | opération   | var2 |
-| debug                      | D   | on/off/print       |             |             |      |
-| sortie de boucle           | E   | nom de boucle      |             |             |      |
-| déclaration de fonction    | F   | nom de boucle      |             |             |      |
-| copier une variable        | H   | var de sortie      | var modelle |             |      |
-| input                      | I   | var                |             |             |      |
-| boucle a tours             | L   | nom de boucle      | nb de tours |             |      |
-| variable aleatoire         | R   | var de sortie      | max (V)     |             |      |
-| afficher du texte          | S   | texte              |             |             |      |
-| téléphoner a une fonction  | T   | nom de la fonction |             |             |      |
-| assignation de variable    | V   | var                | valleur     |             |      |
-| execution si condition     | X   | nom de boucle      | var (B)     |             |      |
-| break                      | Z   |                    |             |             |      |
+[→ erreur d'execution](/doc/errors.md)
