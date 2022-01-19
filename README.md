@@ -19,7 +19,7 @@ Non, il est en PHP le C est 'trop' bas niveau, PHP est plus facile à utiliser s
 
 # 🥤 • Premier programme
 
-Dans cet petit exemple, on va faire un programme qui va afficher Hello.
+Dans ce petit exemple, on va faire un programme qui va afficher Hello.
 En KEA, on va utiliser le mode **S** pour afficher du texte.
 ```kea
 S Hello
