@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/logo.png">
+    <img src="https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/kea.png">
 </p>
 
 # 🍀 • FAQ
