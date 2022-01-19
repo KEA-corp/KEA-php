@@ -1,7 +1,5 @@
-<h1 align = center> KEA 1.1 </h1>
-
 <p align="center">
-    <img src="https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/kea.png" width="370">
+    <img src="https://raw.githubusercontent.com/pf4-DEV/kea-project/main/doc/kea.png">
 </p>
 
 # 🍀 • FAQ
