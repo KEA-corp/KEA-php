@@ -29,6 +29,6 @@ S Hello
 # 👾 • lancer un programme kea
 
 ```shell
-php inter.php <nom du fichier>
+php inter.php <nom du fichier kea>
 ```
 [→ erreur d'execution](/doc/errors.md)

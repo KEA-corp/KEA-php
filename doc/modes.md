@@ -1,4 +1,4 @@
-# mode et args du kea brut
+# Mode et args du kea
 
 | description                | mod | arg1               | arg2        | agr3        | arg4 |
 |----------------------------|-----|--------------------|-------------|-------------|------|
@@ -17,3 +17,15 @@
 | assignation de variable    | V   | var                | valleur     |             |      |
 | execution si condition     | X   | nom de boucle      | var (B)     |             |      |
 | break                      | Z   |                    |             |             |      |
+
+# Comparateurs
+
+| comparateur | description         |
+|------------|----------------------|
+| ==         | égal à               |
+| =          | égal à               |
+| !=         | différent de         |
+| <          | inférieur à          |
+| <=         | inférieur ou égal à  |
+| >          | supérieur à          |
+| >=         | supérieur ou égal à  |
