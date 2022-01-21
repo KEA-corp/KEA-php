@@ -1,0 +1,25 @@
+V 1 1
+V 2 2
+V 1000 1000
+V 6 6
+V 0.5 0.5
+V 0 0
+
+V i 0
+V a 0
+V max 100000000000
+L bcl max
+C i i + 1
+C temp i ^ 2
+C temp 1 / temp
+C a a + temp
+
+C temp i % 1000
+B temp temp = 0
+X aff temp
+C temp a * 6
+C temp temp ^ 0.5
+A temp
+S
+E aff
+E bcl
