@@ -19,6 +19,9 @@ B temp temp = 0
 X aff temp
 C temp a * 6
 C temp temp ^ 0.5
+C temp2 i / 1000
+A temp2
+S k_bcl:_
 A temp
 S
 E aff
