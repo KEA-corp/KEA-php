@@ -8,14 +8,14 @@
 | ✔   | ✔  | D   | debug                      | on/off/print       |             |             |      |
 | ✔   | ✔  | E   | sortie de boucle           | nom de boucle      |             |             |      |
 | ✔   | ❌ | F   | déclaration de fonction    | nom de boucle      |             |             |      |
-| ✔   | ❌ | H   | copier une variable        | var de sortie      | var modelle |             |      |
+| ✔   | ✔  | H   | copier une variable        | var de sortie      | var modelle |             |      |
 | ✔   | ❌ | I   | input                      | var                |             |             |      |
 | ✔   | ✔  | L   | boucle a tours             | nom de boucle      | nb de tours |             |      |
 | ✔   | ❌ | R   | variable aleatoire         | var de sortie      | max (V)     |             |      |
 | ✔   | ✔  | S   | afficher du texte          | texte              |             |             |      |
 | ✔   | ❌ | T   | téléphoner a une fonction  | nom de la fonction |             |             |      |
 | ✔   | ✔  | V   | assignation de variable    | var                | valleur     |             |      |
-| ✔   | ❌ | X   | execution si condition     | nom de boucle      | var (B)     |             |      |
+| ✔   | ✔  | X   | execution si condition     | nom de boucle      | var (B)     |             |      |
 | ✔   | ✔  | Z   | break                      |                    |             |             |      |
 
 # Comparateurs
