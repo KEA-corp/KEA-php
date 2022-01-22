@@ -1,22 +1,22 @@
 # Mode et args du kea
 
-| description                | mod | arg1               | arg2        | agr3        | arg4 |
-|----------------------------|-----|--------------------|-------------|-------------|------|
-| afficher une variable      | A   | var                |             |             |      |
-| comparaison logique        | B   | var de sortie      | var1        | comparateur | var2 |
-| calcul                     | C   | var de sortie      | var1        | opération   | var2 |
-| debug                      | D   | on/off/print       |             |             |      |
-| sortie de boucle           | E   | nom de boucle      |             |             |      |
-| déclaration de fonction    | F   | nom de boucle      |             |             |      |
-| copier une variable        | H   | var de sortie      | var modelle |             |      |
-| input                      | I   | var                |             |             |      |
-| boucle a tours             | L   | nom de boucle      | nb de tours |             |      |
-| variable aleatoire         | R   | var de sortie      | max (V)     |             |      |
-| afficher du texte          | S   | texte              |             |             |      |
-| téléphoner a une fonction  | T   | nom de la fonction |             |             |      |
-| assignation de variable    | V   | var                | valleur     |             |      |
-| execution si condition     | X   | nom de boucle      | var (B)     |             |      |
-| break                      | Z   |                    |             |             |      |
+| php | c++ | mod | description                | arg1               | arg2        | agr3        | arg4 |
+|-----|-----|-----|----------------------------|--------------------|-------------|-------------|------|
+| ✔   | ✔  | A   | afficher une variable      | var                |             |             |      |
+| ✔   | ❌ | B   | comparaison logique        | var de sortie      | var1        | comparateur | var2 |
+| ✔   | ✔  | C   | calcul                     | var de sortie      | var1        | opération   | var2 |
+| ✔   | ✔  | D   | debug                      | on/off/print       |             |             |      |
+| ✔   | ✔  | E   | sortie de boucle           | nom de boucle      |             |             |      |
+| ✔   | ❌ | F   | déclaration de fonction    | nom de boucle      |             |             |      |
+| ✔   | ❌ | H   | copier une variable        | var de sortie      | var modelle |             |      |
+| ✔   | ❌ | I   | input                      | var                |             |             |      |
+| ✔   | ✔  | L   | boucle a tours             | nom de boucle      | nb de tours |             |      |
+| ✔   | ❌ | R   | variable aleatoire         | var de sortie      | max (V)     |             |      |
+| ✔   | ✔  | S   | afficher du texte          | texte              |             |             |      |
+| ✔   | ❌ | T   | téléphoner a une fonction  | nom de la fonction |             |             |      |
+| ✔   | ✔  | V   | assignation de variable    | var                | valleur     |             |      |
+| ✔   | ❌ | X   | execution si condition     | nom de boucle      | var (B)     |             |      |
+| ✔   | ❌ | Z   | break                      |                    |             |             |      |
 
 # Comparateurs
 
