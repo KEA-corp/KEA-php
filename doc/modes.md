@@ -3,7 +3,7 @@
 | php | c++ | mod | description                | arg1               | arg2        | agr3        | arg4 |
 |-----|-----|-----|----------------------------|--------------------|-------------|-------------|------|
 | ✔   | ✔  | A   | afficher une variable      | var                |             |             |      |
-| ✔   | ❌ | B   | comparaison logique        | var de sortie      | var1        | comparateur | var2 |
+| ✔   | ✔  | B   | comparaison logique        | var de sortie      | var1        | comparateur | var2 |
 | ✔   | ✔  | C   | calcul                     | var de sortie      | var1        | opération   | var2 |
 | ✔   | ✔  | D   | debug                      | on/off/print       |             |             |      |
 | ✔   | ✔  | E   | sortie de boucle           | nom de boucle      |             |             |      |
@@ -16,7 +16,7 @@
 | ✔   | ❌ | T   | téléphoner a une fonction  | nom de la fonction |             |             |      |
 | ✔   | ✔  | V   | assignation de variable    | var                | valleur     |             |      |
 | ✔   | ❌ | X   | execution si condition     | nom de boucle      | var (B)     |             |      |
-| ✔   | ❌ | Z   | break                      |                    |             |             |      |
+| ✔   | ✔  | Z   | break                      |                    |             |             |      |
 
 # Comparateurs
 
