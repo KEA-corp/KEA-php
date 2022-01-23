@@ -138,14 +138,14 @@ function bcl_ctrl($code, $i, $nom, $nb){
         array_push($codetoloop, $code[$j]);
     }
     
-    codeinloop($codetoloop, $nom, $nb);
-    return $nom;
+    return codeinloop($codetoloop, $nom, $nb);
 }
 
 function codeinloop($code, $nom ,$max) {
     global $DEBUG, $FUNCTIONS;
     debug_print("DEMARAGE DE LA BOUCLE '$nom'\n");
     $sauter = setsauter("", $nom);
+    $dobreak = 0;
     for ($rep = 0; $rep < $max; $rep++) {
         for ($i = 0; $i < sizeof($code); $i++) {
             $ligne = $code[$i];
@@ -172,7 +172,8 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "L") {
-                    $sauter = setsauter(bcl_ctrl($code, $i, $args[1], getvar($args[2])), $nom);
+                    $dobreak = bcl_ctrl($code, $i, $args[1], getvar($args[2]));
+                    $sauter = setsauter($args[1], $nom);
                 }
 
                 else if ($mode == "E") {
@@ -188,7 +189,10 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "Z") {
-                    break;
+                    $dobreak = 1;
+                    if (isset($args[1])) {
+                        $dobreak = getvar($args[1]);
+                    }
                 }
 
                 else if ($mode == "B") {
@@ -235,7 +239,8 @@ function codeinloop($code, $nom ,$max) {
 
                 else if ($mode == "X") {
                     if (getvar($args[2]) == true) {
-                        $sauter = setsauter(bcl_ctrl($code, $i, $args[1], 1), $nom);
+                        $dobreak = bcl_ctrl($code, $i, $args[1], 1);
+                        $sauter = setsauter($args[1], $nom);
                     }
                     else {
                         $sauter = setsauter($args[1], $nom);
@@ -268,6 +273,9 @@ function codeinloop($code, $nom ,$max) {
             }
             else {
                 debug_print("$nom → passer '$ligne'\n");
+            }
+            if ($dobreak > 0) {
+                return $dobreak - 1;
             }
         }
     }
