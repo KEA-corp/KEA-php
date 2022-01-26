@@ -69,7 +69,7 @@ table td {
       <table>
           <tr>
             <td class = "no_padding">
-              <img src="https://raw.githubusercontent.com/KEA-corp/kea-project/main/doc/brut.png" width="130"/>
+              <img src="brut.png" width="130"/>
             </td>
             <td>
               <h2>kea-project</h2>
