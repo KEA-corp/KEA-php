@@ -1,0 +1,99 @@
+<svg width="730" height="140" xmlns="http://www.w3.org/2000/svg">
+<style>
+svg {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+#background {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  fill: rgb(36, 41, 46);
+  stroke: rgb(255, 255, 255);
+  stroke-width: 2px;
+  rx: 6px;
+  ry: 6px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(114, 137, 217);
+  fill: rgb(36, 41, 46);
+  font-weight: bold;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(114, 137, 217);
+  fill: rgb(36, 41, 46);
+  font-weight: bold;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: rgb(255, 255, 255);
+  white-space:nowrap;
+}
+
+a {
+  color: rgb(114, 137, 217);
+  text-decoration: none;
+}
+
+table td {
+  vertical-align: top;
+  padding: 1em;
+}
+
+.no_padding {
+  padding: 0;
+} 
+
+</style>
+<g>
+  <rect x="5" y="5" id="background" />
+  <g>
+    <foreignObject x="5" y="5" width="700" height="120">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="ellipsis">
+
+      <table>
+          <tr>
+            <td class = "no_padding">
+              <img src="https://raw.githubusercontent.com/KEA-corp/kea-project/main/doc/brut.png" width="130"/>
+            </td>
+            <td>
+              <h2>kea-project</h2>
+              <p><a href = "https://github.com/KEA-corp/kea-project"> [<b>PHP</b>] - classic </a></p><p><a href = "https://github.com/KEA-corp/TURBO-kea"> [<b>CPP</b>] - turbo </a></p>
+            </td>
+            <td>
+              <h3> • état</h3>
+              <p>🟢 [full]</p>
+              <p>🟡 [dev]</p>
+            </td>
+            <td>
+              <h3> • éléments nouveaux</h3>
+              <p> Z - break recursif </p>
+              <p> X - condition </p>
+            </td>
+            <td>
+              <h3> • éléments en cours</h3>
+              <p> 🤔 </p>
+              <p> I - input en CPP </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </foreignObject>
+  </g>
+</g>
+</svg>
