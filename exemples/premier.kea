@@ -4,6 +4,7 @@ V 0 0
 V 0.5 0.5
 V 1 1
 V 2 2
+V 3 3
 V to 30000
 L nbr to
     C i i + 1
@@ -20,7 +21,7 @@ L nbr to
             B bad mod == 0
             X no bad
                 B good 0 == 1
-                Z
+                Z 3
                 E no
             E all
         X prem good
