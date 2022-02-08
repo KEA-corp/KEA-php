@@ -1,6 +1,5 @@
 <?php
-/*
---|~|--|~|--|~|--|~|--|~|--|~|--
+/*|~|--|~|--|~|--|~|--|~|--|~|--
 
 ██  ████        ██████        ██
 ████    ██     ██           ████
@@ -12,8 +11,7 @@
  - codé en : UTF-8
  - langage : php
  - GitHub  : github.com/pf4-DEV
---|~|--|~|--|~|--|~|--|~|--|~|--
-*/
+--|~|--|~|--|~|--|~|--|~|--|~|*/
 
 $version = "1.1.49";
 
@@ -25,16 +23,6 @@ function debug_print($texte, $blue = false){
         } else {
             echo $texte;
         }
-    }
-}
-
-function getvar($name) {
-    global $VAR;
-    if (isset($VAR[$name])) {
-        return $VAR[$name];
-    } else {
-        echo "Variable $name non trouvée\n";
-        return "";
     }
 }
 
@@ -61,26 +49,45 @@ function compar( $comparateur, $var1, $var2) {
     switch($comparateur) {
         case "==":
             return $a == $b;
-        case "=":
-            return $a == $b;
+            case "=":
+                return $a == $b;
         case "!=":
             return $a != $b;
         case ">":
             return $a > $b;
-        case "<":
-            return $a < $b;
+            case "<":
+                return $a < $b;
         case ">=":
             return $a >= $b;
-        case "<=":
+            case "<=":
             return $a <= $b;
         default:
-            echo "Erreur de comparaison : '$comparateur' \n";
+        echo "Erreur de comparaison : '$comparateur' \n";
     }
 }
 
-function setvar($name, $valeur, $ACTIVE) {
+function makename($name, $active) {
+    if ($name[0] != "!") {
+        return $active . "_" . $name;
+    }
+    return $name;
+}
+
+function getvar($name, $active) {
     global $VAR;
-    debug_print("$ACTIVE → V '$name' = '$valeur'\n");
+    $name = makename($name, $active);
+    if (isset($VAR[$name])) {
+        return $VAR[$name];
+    } else {
+        echo "Variable $name non trouvée\n";
+        return "";
+    }
+}
+
+function setvar($name, $valeur, $active) {
+    global $VAR;
+    $name = makename($name, $active);
+    debug_print("$active → V '$name' = '$valeur'\n");
     $VAR[$name] = $valeur;
 }
 
@@ -123,7 +130,7 @@ function start ($code) {
     $code = str_replace("\r", "", $code);
     $code = explode("\n", $code);
 
-    codeinloop($code, "main" ,1);
+    codeinloop($code, "main", 1, "main");
 }
 
 function save_fonction($name, $code, $i) {
@@ -131,17 +138,17 @@ function save_fonction($name, $code, $i) {
     $FUNCTIONS[$name] = [$code, $i];
 }
 
-function bcl_ctrl($code, $i, $nom, $nb){
+function bcl_ctrl($code, $i, $nom, $nb, $fonc_name){
     $codetoloop = array();
                     
     for ($j = $i+1; $j < sizeof($code); $j++) {
         array_push($codetoloop, $code[$j]);
     }
     
-    return codeinloop($codetoloop, $nom, $nb);
+    return codeinloop($codetoloop, $nom, $nb, $fonc_name);
 }
 
-function codeinloop($code, $nom ,$max) {
+function codeinloop($code, $nom ,$max, $fonc_name) {
     global $DEBUG, $FUNCTIONS;
     debug_print("DEMARAGE DE LA BOUCLE '$nom'\n");
     $sauter = setsauter("", $nom);
@@ -172,7 +179,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "L") {
-                    $dobreak = bcl_ctrl($code, $i, $args[1], getvar($args[2]));
+                    $dobreak = bcl_ctrl($code, $i, $args[1], getvar($args[2], $fonc_name), $fonc_name);
                     $sauter = setsauter($args[1], $nom);
                 }
 
@@ -184,14 +191,14 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "C"){
-                    $result = calc($args[3], getvar($args[2]), getvar($args[4]));
+                    $result = calc($args[3], getvar($args[2], $fonc_name), getvar($args[4], $fonc_name));
                     setvar($args[1], $result, $nom);
                 }
 
                 else if ($mode == "Z") {
                     $dobreak = 1;
                     if (isset($args[1])) {
-                        $dobreak = getvar($args[1]);
+                        $dobreak = getvar($args[1], $fonc_name);
                     }
                 }
 
@@ -200,7 +207,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "H") {
-                    setvar($args[1], getvar($args[2]), $nom);
+                    setvar($args[1], getvar($args[2], $fonc_name), $nom);
                 }
 
                 else if ($mode == "F"){
@@ -213,7 +220,7 @@ function codeinloop($code, $nom ,$max) {
                     if (isset($FUNCTIONS[$fonction])) {
                         $fonc_code = $FUNCTIONS[$fonction][0];
                         $oldi = $FUNCTIONS[$fonction][1];
-                        bcl_ctrl($fonc_code, $oldi, $args[1], 1);
+                        bcl_ctrl($fonc_code, $oldi, $args[1], 1, $args[1]);
                     }
                     else {
                         echo "Fonction $fonction non trouvée\n";
@@ -233,13 +240,13 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "R"){
-                    $rand = rand(0, getvar($args[2]));
+                    $rand = rand(0, getvar($args[2], $fonc_name));
                     setvar($args[1], $rand, $nom);
                 }
 
                 else if ($mode == "X") {
-                    if (getvar($args[2]) == true) {
-                        $dobreak = bcl_ctrl($code, $i, $args[1], 1);
+                    if (getvar($args[2], $fonc_name) == true) {
+                        $dobreak = bcl_ctrl($code, $i, $args[1], 1, $fonc_name);
                         $sauter = setsauter($args[1], $nom);
                     }
                     else {
@@ -263,7 +270,7 @@ function codeinloop($code, $nom ,$max) {
                 }
 
                 else if ($mode == "A") {
-                    echo "\e[0;1;33m". getvar($args[1]). "\e[0m";
+                    echo "\e[0;1;33m". getvar($args[1], $fonc_name). "\e[0m";
                     if ($DEBUG) {echo "\n";}
                 }
 
