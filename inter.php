@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "01.02.01";
+$version = "1.2.12";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -39,30 +39,51 @@ function debug_print_all() {
     echo "\nFONCTIONS:\n";
     global $FUNCTIONS;
     foreach ($FUNCTIONS as $key => $value) {
-        echo "- $key = [[...],". $value[1] ."]\n";
+        echo "- $key = [[...],". $value[1] . $value[2] . "]\n";
     }
 }
 
-function compar( $comparateur, $var1, $var2) {
+function compar($comparateur, $var1, $var2) {
     $a = getvar($var1);
     $b = getvar($var2);
     switch($comparateur) {
         case "==":
             return $a == $b;
-            case "=":
-                return $a == $b;
+        case "=":
+            return $a == $b;
         case "!=":
             return $a != $b;
         case ">":
             return $a > $b;
-            case "<":
-                return $a < $b;
+        case "<":
+            return $a < $b;
         case ">=":
             return $a >= $b;
-            case "<=":
+        case "<=":
             return $a <= $b;
         default:
-        echo "Erreur de comparaison : '$comparateur' \n";
+            echo "Erreur de comparaison : '$comparateur' \n";
+    }
+}
+
+function calc($calcul, $var1, $var2) {
+    switch($calcul) {
+        case "+":
+            return $var1 + $var2;
+        case "-":
+            return $var1 - $var2;
+        case "*":
+            return $var1 * $var2;
+        case "^":
+            return $var1 ** $var2;
+        case "**":
+            return $var1 ** $var2;
+        case "/":
+            return $var1 / $var2;
+        case "%":
+            return $var1 % $var2;
+        default:
+            echo "Erreur de calcul : '$calcul' \n";
     }
 }
 
@@ -96,27 +117,18 @@ function setsauter($valeur, $nom) {
     return $valeur;
 }
 
-function calc($calcul, $var1, $var2) {
-    if ($calcul == "+"){
-        return $var1 + $var2;
-    }
-    else if ($calcul == "-"){
-        return $var1 - $var2;
-    }
-    else if ($calcul == "*"){
-        return $var1 * $var2;
-    }
-    else if ($calcul == "/"){
-        return $var1 / $var2;
-    }
-    else if ($calcul == "^"){
-        return pow($var1, $var2);
-    }
-    else if ($calcul == "%"){
-        return $var1 % $var2;
-    }
-    else {
-        echo "calc: operateur inconnu: $calcul\n";
+function add_sharp($code) {
+    for ($i = 0; $i < sizeof($code); $i++) {
+        $args = explode(" ", $code[$i]);
+        if($args[0] != "#") {
+            return $code;
+        }
+        else if ($args[1] = "add") {
+            unset($code[$i]);
+            $to_add = file_get_contents($args[2]);
+            $to_add = explode("\n", str_replace("\r", "", str_replace(";", "\n", $to_add)));
+            $code = array_merge($to_add, $code);
+        }
     }
 }
 
@@ -129,6 +141,8 @@ function start ($code) {
     $code = str_replace(";", "\n", $code);
     $code = str_replace("\r", "", $code);
     $code = explode("\n", $code);
+
+    $code = add_sharp($code);
 
     codeinloop($code, "main", 1, "main");
 }
@@ -159,10 +173,9 @@ function start_fonction($args, $fonc_name) {
                 echo "Erreur: fonction '$args[1]' : argument $j non défini\n";
             }
         }
-        bcl_ctrl($fonc_code, $oldi, $args[1], 1, $args[1]);
+        return bcl_ctrl($fonc_code, $oldi, $args[1], 1, $args[1])[1];
     }
-
-    else {echo "Fonction $fonction non trouvée\n";}
+    echo "Fonction $fonction non trouvée\n";
 }
 
 function save_fonction($name, $code, $i, $args) {
@@ -211,14 +224,14 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "L") {
-                    $dobreak = bcl_ctrl($code, $i, $args[1], getvar($args[2], $fonc_name), $fonc_name);
+                    $dobreak = bcl_ctrl($code, $i, $args[1], getvar($args[2], $fonc_name), $fonc_name)[0];
                     $sauter = setsauter($args[1], $nom);
                 }
 
                 else if ($mode == "E") {
                     if ($args[1] == $nom) {
                         debug_print("ARRET DE LA BOUCLE '$nom'\n");
-                        break;
+                        return [0, getvar($args[2], $fonc_name)];
                     }
                 }
 
@@ -252,9 +265,12 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "T"){
-                    start_fonction($args, $fonc_name);
+                    $sortie = start_fonction($args, $fonc_name);
+                    if (isset($args[2])) {
+                        setvar($args[3], $sortie, $nom);
+                    }
                 }
-                
+
                 else if ($mode == "D") {
                     if ($args[1] == "on") {
                         $DEBUG = true;
@@ -310,7 +326,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 debug_print("$nom → passer '$ligne'\n");
             }
             if ($dobreak > 0) {
-                return $dobreak - 1;
+                return [$dobreak - 1, 0];
             }
         }
     }

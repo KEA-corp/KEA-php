@@ -1,10 +1,5 @@
-F fonc var1&var2
-    A var1
-    S
-    A var2
-    E fonc
+# add mod/atf.kea
 
-V test coucou
-V omg 42
-
-T fonc test&omg
+V to_calc 10
+T double to_calc exit
+A exit
