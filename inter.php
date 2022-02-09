@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "1.1.49";
+$version = "01.02.01";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -133,9 +133,41 @@ function start ($code) {
     codeinloop($code, "main", 1, "main");
 }
 
-function save_fonction($name, $code, $i) {
+function start_fonction($args, $fonc_name) {
     global $FUNCTIONS;
-    $FUNCTIONS[$name] = [$code, $i];
+
+    $fonction = $args[1];
+
+    if (isset($FUNCTIONS[$fonction])) {
+
+        $fonc_code =    $FUNCTIONS[$fonction][0];
+        $oldi =         $FUNCTIONS[$fonction][1];
+        $in_fonc_args = $FUNCTIONS[$fonction][2];
+
+        if (isset($args[2])) {
+            $out_args = explode("&", $args[2]);
+        } else {
+            $out_args = [];
+        }
+
+        for ($j = 0; $j < sizeof($in_fonc_args); $j++) {
+            if(isset($out_args[$j])) {
+                setvar($in_fonc_args[$j], getvar($out_args[$j], $fonc_name), $args[1]);
+                debug_print("création de la variable '$in_fonc_args[$j]' = '". getvar($out_args[$j], $fonc_name) ."' dans la fonction '$args[1]'\n");
+            }
+            else {
+                echo "Erreur: fonction '$args[1]' : argument $j non défini\n";
+            }
+        }
+        bcl_ctrl($fonc_code, $oldi, $args[1], 1, $args[1]);
+    }
+
+    else {echo "Fonction $fonction non trouvée\n";}
+}
+
+function save_fonction($name, $code, $i, $args) {
+    global $FUNCTIONS;
+    $FUNCTIONS[$name] = [$code, $i, $args];
 }
 
 function bcl_ctrl($code, $i, $nom, $nb, $fonc_name){
@@ -211,20 +243,16 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "F"){
-                    save_fonction($args[1], $code, $i);
+                    $fonc_args = array();
+                    if (isset($args[2])) {
+                        $fonc_args = explode("&", $args[2]);
+                    }
+                    save_fonction($args[1], $code, $i, $fonc_args);
                     $sauter = setsauter($args[1], $nom);
                 }
 
                 else if ($mode == "T"){
-                    $fonction = $args[1];
-                    if (isset($FUNCTIONS[$fonction])) {
-                        $fonc_code = $FUNCTIONS[$fonction][0];
-                        $oldi = $FUNCTIONS[$fonction][1];
-                        bcl_ctrl($fonc_code, $oldi, $args[1], 1, $args[1]);
-                    }
-                    else {
-                        echo "Fonction $fonction non trouvée\n";
-                    }
+                    start_fonction($args, $fonc_name);
                 }
                 
                 else if ($mode == "D") {
