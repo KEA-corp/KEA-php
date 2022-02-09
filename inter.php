@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "1.2.12";
+$version = "1.2.15";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -203,7 +203,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
             $ligne = $code[$i];
             $ligne = trim($ligne);
 
-            debug_print("[$nom]($rep~$i) *** $ligne ***\n", true);
+            debug_print("[$fonc_name | $nom]($rep~$i) *** $ligne ***\n", true);
 
             $args = explode(" ", $ligne);
             $mode = $args[0];
@@ -220,7 +220,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 else if ($mode == "V"){
                     $var = $args[1];
                     $val = $args[2];
-                    setvar($var, $val, $nom);
+                    setvar($var, $val, $fonc_name);
                 }
 
                 else if ($mode == "L") {
@@ -230,14 +230,19 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
 
                 else if ($mode == "E") {
                     if ($args[1] == $nom) {
-                        debug_print("ARRET DE LA BOUCLE '$nom'\n");
-                        return [0, getvar($args[2], $fonc_name)];
+                        debug_print("ARRET DE LA BOUCLE '$nom'");
+                        if (isset($args[2])) {
+                            debug_print(" PAR RETURN\n");
+                            return [0, getvar($args[2], $fonc_name)];
+                        }
+                        debug_print(" PAR BREAK\n");
+                        break;
                     }
                 }
 
                 else if ($mode == "C"){
                     $result = calc($args[3], getvar($args[2], $fonc_name), getvar($args[4], $fonc_name));
-                    setvar($args[1], $result, $nom);
+                    setvar($args[1], $result, $fonc_name);
                 }
 
                 else if ($mode == "Z") {
@@ -330,6 +335,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
             }
         }
     }
+    return [0, 0];
 }
 
 if (isset($argv[1])) {

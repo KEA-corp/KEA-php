@@ -1,5 +1,7 @@
 # add mod/atf.kea
 
-V to_calc 10
-T double to_calc exit
+V to_calc 64
+
+T square_root to_calc exit
+
 A exit
