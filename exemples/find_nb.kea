@@ -25,7 +25,7 @@ L m max
         E noni
 
 
-    B cond tofind == userval
+    B cond tofind = userval
     X oui cond
         S bravo!
         S

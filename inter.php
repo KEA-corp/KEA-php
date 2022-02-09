@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "1.2.15";
+$version = "1.2.16";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -43,9 +43,7 @@ function debug_print_all() {
     }
 }
 
-function compar($comparateur, $var1, $var2) {
-    $a = getvar($var1);
-    $b = getvar($var2);
+function compar($comparateur, $a, $b) {
     switch($comparateur) {
         case "==":
             return $a == $b;
@@ -253,7 +251,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "B") {
-                    setvar($args[1], compar($args[3], $args[2], $args[4]), $nom);
+                    setvar($args[1], compar($args[3], getvar($args[2], $fonc_name), getvar($args[4], $fonc_name)), $fonc_name);
                 }
 
                 else if ($mode == "H") {
@@ -295,7 +293,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
 
                 else if ($mode == "X") {
                     if (getvar($args[2], $fonc_name) == true) {
-                        $dobreak = bcl_ctrl($code, $i, $args[1], 1, $fonc_name);
+                        $dobreak = bcl_ctrl($code, $i, $args[1], 1, $fonc_name)[0];
                         $sauter = setsauter($args[1], $nom);
                     }
                     else {
@@ -315,7 +313,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "I") {
-                    user_input($args[1], $nom);
+                    user_input($args[1], $fonc_name);
                 }
 
                 else if ($mode == "A") {

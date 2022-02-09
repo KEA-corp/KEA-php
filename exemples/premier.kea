@@ -9,9 +9,9 @@ V to 30000
 L nbr to
     C i i + 1
     C mod i % 2
-    B inpair mod != 0
+    V inpair 1
     X done inpair
-        B good 1 == 1
+        V good 1
         C max i ^ 0.5
         C max max - 1
         V x 1
