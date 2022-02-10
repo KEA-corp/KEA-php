@@ -1,20 +1,20 @@
-# add mod/atf.kea
+# add mod/bool.kea
 
 V 0 0
 V 1 1
 
-T or 0&0 exit
+T and 0&0 exit
 A exit
 S
 
-T or 0&1 exit
+T and 0&1 exit
 A exit
 S
 
-T or 1&0 exit
+T and 1&0 exit
 A exit
 S
 
-T or 1&1 exit
+T and 1&1 exit
 A exit
 S
