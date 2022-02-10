@@ -12,3 +12,9 @@ F factorielle to
         C i i - 1
         E loopto
     E factorielle exit
+
+F is_div var1&div
+    V 0 0
+    C exit var1 % div
+    B exit exit = 0
+    E is_div exit

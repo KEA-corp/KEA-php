@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "1.2.16";
+$version = "1.2.20";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -116,18 +116,25 @@ function setsauter($valeur, $nom) {
 }
 
 function add_sharp($code) {
-    for ($i = 0; $i < sizeof($code); $i++) {
+    $to_add = array();
+    $names  = array();
+    for ($i = 0; $i <= sizeof($code); $i++) {
         $args = explode(" ", $code[$i]);
         if($args[0] != "#") {
-            return $code;
+            break;
         }
         else if ($args[1] = "add") {
-            unset($code[$i]);
-            $to_add = file_get_contents($args[2]);
-            $to_add = explode("\n", str_replace("\r", "", str_replace(";", "\n", $to_add)));
-            $code = array_merge($to_add, $code);
+            unset($code[0]);
+            array_push($to_add, explode("\n", str_replace("\r", "", str_replace(";", "\n", file_get_contents($args[2])))));
+            array_push($names, $args[2]);
         }
     }
+    foreach ($to_add as $k => $e) {
+        $code = array_merge($e, $code);
+        echo "merge de '$names[$k]' avec succès!\n";
+    }
+
+    return $code;
 }
 
 function start ($code) {

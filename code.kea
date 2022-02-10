@@ -1,20 +1,2 @@
+# add mod/math.kea
 # add mod/bool.kea
-
-V 0 0
-V 1 1
-
-T and 0&0 exit
-A exit
-S
-
-T and 0&1 exit
-A exit
-S
-
-T and 1&0 exit
-A exit
-S
-
-T and 1&1 exit
-A exit
-S
