@@ -1,2 +1,6 @@
-# add mod/Math.kea
+# add mod/Uf.kea
 # add mod/Bool.kea
+
+V stream 0
+T not stream stream
+A stream
