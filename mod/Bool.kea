@@ -26,3 +26,13 @@ F and var1&var2
         V sortie 0
         E t2
     E and sortie
+
+F nand var1&var2
+    T and var1&var2 var3
+    T not var3 sortie
+    E nand sortie
+
+V 1 1
+V 0 0
+T nand 1&0 exit
+A exit
