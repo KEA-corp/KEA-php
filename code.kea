@@ -1,6 +1,9 @@
 # add mod/Uf.kea
 # add mod/Bool.kea
 
-V stream 0
-T not stream stream
-A stream
+V stream0 0
+V stream1 0
+T not stream0 stream0
+T not stream1 stream1
+T and stream0&stream1 stream0
+T print stream0

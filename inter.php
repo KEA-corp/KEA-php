@@ -262,7 +262,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "H") {
-                    setvar($args[1], getvar($args[2], $fonc_name), $nom);
+                    setvar($args[1], getvar($args[2], $fonc_name), $fonc_name);
                 }
 
                 else if ($mode == "F"){
@@ -276,8 +276,8 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
 
                 else if ($mode == "T"){
                     $sortie = start_fonction($args, $fonc_name);
-                    if (isset($args[2])) {
-                        setvar($args[3], $sortie, $nom);
+                    if (isset($args[3])) {
+                        setvar($args[3], $sortie, $fonc_name);
                     }
                 }
 
