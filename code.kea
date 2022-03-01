@@ -12,6 +12,8 @@ C stream0 stream0 + temp
 H max stream0
 V stream0 0
 H j stream0
+V stream0 1
+H good stream0
 H stream0 max
 V temp 2
 C stream0 stream0 - temp
@@ -25,24 +27,21 @@ C stream0 stream0 % j2
 V temp 0
 B stream0 stream0 == temp
 X if2 stream0
+V stream0 0
+H good stream0
 V stream0 2
 Z stream0
 E if2
-H stream0 max
-V temp 1
-C stream0 stream0 - temp
-B stream0 stream0 < j2
-X if3 stream0
-H stream0 i
-T print stream0
-V stream0 2
-Z stream0
-E if3
 H stream0 j
 V temp 1
 C stream0 stream0 + temp
 H j stream0
 E loop1
+H stream0 good
+X if3 stream0
+H stream0 i
+T print stream0
+E if3
 H stream0 i
 V temp 2
 C stream0 stream0 + temp
