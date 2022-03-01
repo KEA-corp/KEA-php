@@ -1,9 +1,12 @@
 # add mod/Uf.kea
 # add mod/Bool.kea
 
-V stream0 0
-V stream1 0
+I x
+
+H stream0 x
+V temp 1
+C stream0 stream0 - temp
+V temp 0
+B stream0 stream0 == temp
 T not stream0 stream0
-T not stream1 stream1
-T and stream0&stream1 stream0
 T print stream0
