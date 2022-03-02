@@ -324,7 +324,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                 }
 
                 else if ($mode == "A") {
-                    echo "\e[0;1;33m". getvar($args[1], $fonc_name). "\e[0m";
+                    echo "\e[0;1;33m". str_replace("_", " ", getvar($args[1], $fonc_name)). "\e[0m";
                     if ($DEBUG) {echo "\n";}
                 }
 
