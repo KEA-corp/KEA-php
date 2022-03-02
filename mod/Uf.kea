@@ -2,3 +2,16 @@ F print var
     A var
     S
     E print
+
+F cout var
+    A var
+    E cout
+
+F input var
+    A var
+    I sortie
+    E input sortie
+
+F random max
+    R sortie max
+    E random sortie
