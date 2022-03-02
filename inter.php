@@ -288,7 +288,7 @@ function codeinloop($code, $nom ,$max, $fonc_name) {
                     else if ($args[1] == "off") {
                         $DEBUG = false;
                     }
-                    else{
+                    else {
                         debug_print_all();
                     }
                 }
