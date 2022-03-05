@@ -39,7 +39,7 @@ function debug_print_all() {
     echo "\nFONCTIONS:\n";
     global $FUNCTIONS;
     foreach ($FUNCTIONS as $key => $value) {
-        echo "- $key = [[...], i". $value[1] . "]\n";
+        echo "- $key ~ i$value[1]\n";
     }
 }
 
