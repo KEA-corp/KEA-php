@@ -1,49 +1,9 @@
-# add mod/Uf.kea
+D on
 
-V stream0 1
-H i stream0
-V stream0 15000
-L loop0 stream0
-    H stream0 i
-    V temp 0.5
-    C stream0 stream0 ** temp
-    V temp 1
-    C stream0 stream0 + temp
-    H max stream0
-    V stream0 0
-    H j stream0
-    V stream0 1
-    H good stream0
-    H stream0 max
-    V temp 2
-    C stream0 stream0 - temp
-    L loop1 stream0
-        H stream0 j
-        V temp 2
-        C stream0 stream0 + temp
-        H j2 stream0
-        H stream0 i
-        C stream0 stream0 % j2
-        V temp 0
-        B stream0 stream0 == temp
-        X if2 stream0
-            V stream0 0
-            H good stream0
-            V stream0 2
-            Z stream0
-            E if2
-        H stream0 j
-        V temp 1
-        C stream0 stream0 + temp
-        H j stream0
-        E loop1
-    H stream0 good
-    X if3 stream0
-        H stream0 i
-        T print stream0
-    E if3
-    H stream0 i
-    V temp 2
-    C stream0 stream0 + temp
-    H i stream0
-    E loop0
+F print var
+    A var
+    S
+    E print var
+
+V ext 42
+T print ext
