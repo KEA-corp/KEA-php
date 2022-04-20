@@ -13,7 +13,7 @@
  - GitHub  : github.com/pf4-DEV
 --|~|--|~|--|~|--|~|--|~|--|~|*/
 
-$version = "1.2.20";
+$version = "1.2.21";
 
 function debug_print($texte, $blue = false){
     global $DEBUG;
@@ -97,10 +97,9 @@ function getvar($name, $active) {
     $name = makename($name, $active);
     if (isset($VAR[$name])) {
         return $VAR[$name];
-    } else {
-        echo "Variable $name non trouvée\n";
-        return "";
     }
+    echo "Variable $name non trouvée\n";
+    return "";
 }
 
 function setvar($name, $valeur, $active) {
